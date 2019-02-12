@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Delval Days</string>
+    <string name="logo_desc">Michael Cerne Logo</string>
+    <string name="retry_text">An error occurred\nPress floating button to retry</string>
+</resources>
