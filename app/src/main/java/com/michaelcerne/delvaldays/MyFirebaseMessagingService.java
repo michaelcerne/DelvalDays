@@ -17,9 +17,9 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
-    
+
     static final String TAG = "MsgFirebaseServ";
-    
+
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         JSONArray mData;
@@ -37,7 +37,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     mFinal.add(mData.getJSONObject(i).getString("summary"));
                 }
             }
-        } catch(JSONException e) {
+        } catch (JSONException e) {
             Log.e(TAG, "JSON error occurred");
         }
         if (mFinal.size() > 0) {
@@ -49,7 +49,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
             NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-            notificationManager.notify(Integer.parseInt(new SimpleDateFormat("ddHHmmss",  Locale.US).format(mDate)), mBuilder.build());
+            notificationManager.notify(Integer.parseInt(new SimpleDateFormat("ddHHmmss", Locale.US).format(mDate)), mBuilder.build());
         }
     }
 
