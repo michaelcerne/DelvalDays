@@ -2,6 +2,7 @@ package com.michaelcerne.delvaldays;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    private SwipeRefreshLayout refreshView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseMessaging.getInstance().subscribeToTopic("all");
         FloatingActionButton fab = findViewById(R.id.fab);
+        refreshView = findViewById(R.id.refreshView);
 
         mRecyclerView = findViewById(R.id.my_recycler_view);
 
@@ -38,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.addItemDecoration(new DividerItemDecoration(mRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
 
         fab.setOnClickListener(view -> updateRecycler());
+        refreshView.setOnRefreshListener(() -> updateRecycler());
+
         updateRecycler();
 
     }
@@ -71,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Error: " + response.message(),
                                 Toast.LENGTH_LONG).show();
                         findViewById(R.id.errorPanel).setVisibility(View.VISIBLE);
+                        refreshView.setRefreshing(false);
                     });
                     throw new IOException("Unexpected code " + response);
                 } else {
@@ -84,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
                             mAdapter.notifyDataSetChanged();
                             findViewById(R.id.loadingPanel).setVisibility(View.GONE);
                             findViewById(R.id.errorPanel).setVisibility(View.GONE);
+                            refreshView.setRefreshing(false);
                         });
                     } catch (JSONException e) {
                         showError(e.toString());
@@ -100,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.LENGTH_LONG).show();
             findViewById(R.id.loadingPanel).setVisibility(View.GONE);
             findViewById(R.id.errorPanel).setVisibility(View.VISIBLE);
+            refreshView.setRefreshing(false);
         });
     }
 }
