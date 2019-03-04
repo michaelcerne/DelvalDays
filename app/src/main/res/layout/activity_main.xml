@@ -25,9 +25,10 @@
     />
     <ImageView
             android:layout_width="match_parent"
-            android:layout_height="64dp" app:srcCompat="@drawable/michaelcerne"
+            android:layout_height="64dp" app:srcCompat="@drawable/delvaldays_feature_mc"
             android:id="@+id/imageView" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" android:contentDescription="@string/logo_desc"/>
+            app:layout_constraintTop_toTopOf="parent" android:contentDescription="@string/logo_desc"
+            android:cropToPadding="false"/>
     <RelativeLayout
             android:id="@+id/loadingPanel"
             android:layout_width="match_parent"
