@@ -43,7 +43,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         if (mFinal.size() > 0) {
             mListString = TextUtils.join(", ", mFinal);
             NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, "1000")
-                    .setSmallIcon(R.drawable.michaelcerne_icon)
+                    .setSmallIcon(R.drawable.delvaldays_icon)
                     .setContentTitle(new SimpleDateFormat("EEEE MM/dd", Locale.US).format(mDate))
                     .setContentText(mListString)
                     .setPriority(NotificationCompat.PRIORITY_DEFAULT);
